@@ -7,16 +7,24 @@
     "url": "https://github.com/contentful-userland/gatsby-contentful-starter/issues"
   },
   "dependencies": {
+    "@contentful/rich-text-react-renderer": "^14.1.1",
+    "@contentful/rich-text-types": "^14.1.1",
+    "@material-ui/core": "^4.11.0",
+    "@material-ui/icons": "^4.9.1",
     "gatsby-image": "^2.3.4",
+    "gatsby-plugin-intl": "^0.3.3",
+    "gatsby-plugin-prefetch-google-fonts": "^1.4.3",
     "gatsby-plugin-react-helmet": "^3.2.4",
     "gatsby-plugin-sharp": "^2.5.6",
-    "gatsby-source-contentful": "^2.2.9",
+    "gatsby-source-contentful": "^2.3.56",
     "gatsby-transformer-remark": "^2.7.3",
     "gatsby-transformer-sharp": "^2.4.6",
     "lodash": "^4.17.15",
+    "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-helmet": "^6.0.0",
+    "recompose": "^0.30.0",
     "sharp": "^0.25.2"
   },
   "devDependencies": {
@@ -31,7 +39,13 @@
     "inquirer": "^7.1.0",
     "prettier": "^2.0.4",
     "rimraf": "^3.0.2",
-    "yargs-parser": "^18.1.3"
+    "yargs-parser": "^18.1.3",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-prettier": "^6.3.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-react-hooks": "^2.0.1"
   },
   "engines": {
     "node": ">=10.13.0"

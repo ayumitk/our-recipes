@@ -1,26 +1,39 @@
-import React from 'react'
-import { Link } from 'gatsby'
-import base from './base.css'
-import Container from './container'
-import Navigation from './navigation'
+import React, { Component } from 'react'
+import { ThemeProvider, CssBaseline, withStyles } from '@material-ui/core'
+import Header from './Header'
+import Footer from './Footer'
+import theme from '../styles/theme'
 
-class Template extends React.Component {
+const styles = () => ({
+  root: {
+    color: theme.palette.text.primary,
+    '& a': {
+      // color: theme.palette.primary.main,
+    },
+  },
+})
+
+class Template extends Component {
   render() {
-    const { location, children } = this.props
+    const { location, children, classes } = this.props
     let header
 
     let rootPath = `/`
     if (typeof __PREFIX_PATHS__ !== `undefined` && __PREFIX_PATHS__) {
-      rootPath = __PATH_PREFIX__ + `/`
+      rootPath = `${__PATH_PREFIX__}/`
     }
 
     return (
-      <Container>
-        <Navigation />
-        {children}
-      </Container>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <div className={classes.root}>
+          <Header />
+          {children}
+          <Footer />
+        </div>
+      </ThemeProvider>
     )
   }
 }
 
-export default Template
+export default withStyles(styles)(Template)
