@@ -8,8 +8,6 @@ import theme from '../styles/theme'
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 345,
-    position: `relative`,
     '& a': {
       textDecoration: 'none',
     },

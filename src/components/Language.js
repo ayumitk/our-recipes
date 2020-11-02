@@ -1,27 +1,44 @@
 import React from 'react'
 import { IntlContextConsumer, changeLocale } from 'gatsby-plugin-intl'
 import LanguageIcon from '@material-ui/icons/Language'
-import Button from '@material-ui/core/Button'
+import { Button, makeStyles } from '@material-ui/core'
 
 const languageName = {
-  en: 'English',
+  en: 'EN',
   ja: '日本語',
 }
 
-const Language = () => (
-  <IntlContextConsumer>
-    {({ languages, language: currentLocale }) =>
-      languages.map((language) =>
-        currentLocale !== language ? (
-          <Button key={language} onClick={() => changeLocale(language)} startIcon={<LanguageIcon />}>
-            {languageName[language]}
-          </Button>
-        ) : (
-          ''
+const useStyles = makeStyles(() => ({
+  root: {},
+  languageBtn: {
+    '& .MuiButton-startIcon': {
+      marginRight: `4px`,
+    },
+  },
+}))
+
+const Language = () => {
+  const classes = useStyles()
+  return (
+    <IntlContextConsumer>
+      {({ languages, language: currentLocale }) =>
+        languages.map((language) =>
+          currentLocale !== language ? (
+            <Button
+              key={language}
+              onClick={() => changeLocale(language)}
+              startIcon={<LanguageIcon />}
+              className={classes.languageBtn}
+            >
+              {languageName[language]}
+            </Button>
+          ) : (
+            ''
+          )
         )
-      )
-    }
-  </IntlContextConsumer>
-)
+      }
+    </IntlContextConsumer>
+  )
+}
 
 export default Language

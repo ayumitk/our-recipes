@@ -17,6 +17,12 @@ const styles = () => ({
     gridTemplateColumns: `repeat(4, 1fr)`,
     gridColumnGap: `20px`,
     gridRowGap: `20px`,
+    [theme.breakpoints.down('sm')]: {
+      gridTemplateColumns: `repeat(3, 1fr)`,
+    },
+    [theme.breakpoints.down('xs')]: {
+      gridTemplateColumns: `repeat(1, 1fr)`,
+    },
   },
   container: {
     paddingTop: theme.spacing(4),

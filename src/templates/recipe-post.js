@@ -5,7 +5,7 @@ import get from 'lodash/get'
 import Img from 'gatsby-image'
 import { MARKS } from '@contentful/rich-text-types'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
-import { injectIntl } from 'gatsby-plugin-intl'
+import { injectIntl, Link } from 'gatsby-plugin-intl'
 import { Typography, withStyles, Container } from '@material-ui/core'
 import compose from 'recompose/compose'
 import PropTypes from 'prop-types'
@@ -16,6 +16,33 @@ const styles = () => ({
   root: {},
   container: {
     paddingBottom: theme.spacing(6),
+  },
+  title: {
+    marginBottom: theme.spacing(2),
+  },
+  category: {
+    fontSize: `0.937rem`,
+    backgroundColor: theme.palette.text.primary,
+    color: `#fff`,
+    display: `inline-block`,
+    padding: `0.15rem 0.75rem`,
+    textDecoration: `none`,
+    marginTop: theme.spacing(4),
+    marginBottom: theme.spacing(1),
+  },
+  tag: {
+    backgroundColor: `#f2ebd1`,
+    color: theme.palette.text.primary,
+    display: `inline-block`,
+    padding: `0 1rem`,
+    lineHeight: `34px`,
+    borderRadius: `17px`,
+    fontSize: `0.937rem`,
+    marginRight: `0.15rem`,
+    textDecoration: `none`,
+    '&:hover': {
+      backgroundColor: theme.palette.primary.light,
+    },
   },
 })
 
@@ -56,24 +83,22 @@ class RecipePostTemplate extends Component {
           <div>
             <Img alt={post.title} fluid={post.heroImage.fluid} />
           </div>
+          {post.categories.map((category) => (
+            <Link to={`/category/${category.slug}/`} key={category.slug} class={classes.category}>
+              {category.categoryName}
+            </Link>
+          ))}
           <Typography component="h1" variant="h4" className={classes.title}>
             {post.title}
           </Typography>
-          <p>
-            {post.categories.map((category) => (
-              <a href={`/category/${category.slug}/`} key={category.slug}>
-                {category.categoryName}
-              </a>
-            ))}
-          </p>
-          <p>
+          <Typography>{post.publishDate}</Typography>
+          <div>
             {post.tags.map((tag) => (
-              <a href={`/tag/${tag.slug}/`} key={tag.slug}>
+              <a href={`/tag/${tag.slug}/`} key={tag.slug} className={classes.tag}>
                 {tag.tagName}
               </a>
             ))}
-          </p>
-          <p>{post.publishDate}</p>
+          </div>
           <div>{documentToReactComponents(post.body.json, options)}</div>
         </Container>
       </Layout>

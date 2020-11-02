@@ -44,7 +44,7 @@ const Header = () => {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" color="transparent" elevation={1}>
+      <AppBar position="relative" color="transparent" elevation={1}>
         <Toolbar>
           <IconButton
             edge="start"
