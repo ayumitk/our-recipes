@@ -1,6 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'gatsby-plugin-intl'
-import { makeStyles, Typography, AppBar, Toolbar, IconButton } from '@material-ui/core'
+import {
+  makeStyles,
+  Typography,
+  AppBar,
+  Toolbar,
+  IconButton,
+  List,
+  ListItem,
+  ListItemText,
+  Drawer,
+} from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu'
 import theme from '../styles/theme'
 import Language from './Language'
@@ -24,14 +34,49 @@ const useStyles = makeStyles(() => ({
 
 const Header = () => {
   const classes = useStyles()
+  const [state, setState] = useState({
+    isOpen: false,
+  })
+
+  const toggleDrawer = (isOpen) => () => {
+    setState({ isOpen: !isOpen })
+  }
+
   return (
     <div className={classes.root}>
       <AppBar position="static" color="transparent" elevation={1}>
         <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+          <IconButton
+            edge="start"
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="menu"
+            onClick={toggleDrawer()}
+          >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h5" align="center" className={classes.title}>
+
+          <Drawer anchor="left" open={state.isOpen} onClose={toggleDrawer(state.isOpen)}>
+            <List>
+              <ListItem>
+                <ListItemText>
+                  <Link to="/category/north-american/">North American</Link>
+                </ListItemText>
+              </ListItem>
+              <ListItem>
+                <ListItemText>
+                  <Link to="/category/mexican/">Mexican</Link>
+                </ListItemText>
+              </ListItem>
+              <ListItem>
+                <ListItemText>
+                  <Link to="/category/dessert/">Dessert</Link>
+                </ListItemText>
+              </ListItem>
+            </List>
+          </Drawer>
+
+          <Typography variant="h4" align="center" className={classes.title}>
             <Link to="/" className={classes.titleLink}>
               Our Recipes
             </Link>

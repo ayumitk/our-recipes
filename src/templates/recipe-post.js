@@ -40,12 +40,19 @@ class RecipePostTemplate extends Component {
     const post = get(this.props, 'data.contentfulRecipe')
     const siteTitle = get(this.props, 'data.site.siteMetadata.title')
 
-    const { classes, location } = this.props
+    const { classes, location, pageContext } = this.props
+
+    const { language } = pageContext.intl
+    console.log(language)
 
     return (
       <Layout location={location}>
         <Helmet title={`${post.title} | ${siteTitle}`} />
-        <Container maxWidth="md" className={classes.container}>
+        <Container
+          maxWidth="md"
+          className={classes.container}
+          style={{ fontSize: `${language === 'en' ? '1.125rem' : `1rem`}` }}
+        >
           <div>
             <Img alt={post.title} fluid={post.heroImage.fluid} />
           </div>
@@ -79,6 +86,7 @@ export default compose(injectIntl, withStyles(styles))(RecipePostTemplate)
 RecipePostTemplate.propTypes = {
   classes: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
+  pageContext: PropTypes.object.isRequired,
 }
 
 export const pageQuery = graphql`
