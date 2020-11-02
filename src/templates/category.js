@@ -5,6 +5,7 @@ import { Helmet } from 'react-helmet'
 import { injectIntl } from 'gatsby-plugin-intl'
 import compose from 'recompose/compose'
 import { Typography, withStyles, Container } from '@material-ui/core'
+import PropTypes from 'prop-types'
 import Layout from '../components/layout'
 import ArticlePreview from '../components/article-preview'
 import theme from '../styles/theme'
@@ -32,10 +33,10 @@ class CategoryIndex extends Component {
     const posts = get(this, 'props.data.allContentfulRecipe.edges')
     const category = get(this, 'props.data.allContentfulCategory.edges')
 
-    const { classes } = this.props
+    const { classes, location } = this.props
 
     return (
-      <Layout location={this.props.location}>
+      <Layout location={location}>
         <Helmet title={siteTitle} />
         <Container className={classes.container}>
           <Typography component="h1" variant="h5" align="center" className={classes.sectionHeadline}>
@@ -53,6 +54,11 @@ class CategoryIndex extends Component {
 }
 
 export default compose(injectIntl, withStyles(styles))(CategoryIndex)
+
+CategoryIndex.propTypes = {
+  classes: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
+}
 
 export const pageQuery = graphql`
   query CategoryIndexQuery($locale: String, $category: String) {

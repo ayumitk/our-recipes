@@ -1,10 +1,11 @@
-import React, { Component } from 'react'
-import { ThemeProvider, CssBaseline, withStyles } from '@material-ui/core'
+import React from 'react'
+import { ThemeProvider, CssBaseline, makeStyles } from '@material-ui/core'
+import PropTypes from 'prop-types'
 import Header from './Header'
 import Footer from './Footer'
 import theme from '../styles/theme'
 
-const styles = () => ({
+const useStyles = makeStyles({
   root: {
     color: theme.palette.text.primary,
     '& a': {
@@ -13,27 +14,23 @@ const styles = () => ({
   },
 })
 
-class Template extends Component {
-  render() {
-    const { location, children, classes } = this.props
-    let header
+const Layout = ({ children }) => {
+  const classes = useStyles()
 
-    let rootPath = `/`
-    if (typeof __PREFIX_PATHS__ !== `undefined` && __PREFIX_PATHS__) {
-      rootPath = `${__PATH_PREFIX__}/`
-    }
-
-    return (
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <div className={classes.root}>
-          <Header />
-          {children}
-          <Footer />
-        </div>
-      </ThemeProvider>
-    )
-  }
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <div className={classes.root}>
+        <Header />
+        {children}
+        <Footer />
+      </div>
+    </ThemeProvider>
+  )
 }
 
-export default withStyles(styles)(Template)
+export default Layout
+
+Layout.propTypes = {
+  children: PropTypes.array.isRequired,
+}

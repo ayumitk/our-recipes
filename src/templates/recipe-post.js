@@ -21,6 +21,14 @@ const styles = () => ({
 
 const Bold = ({ children }) => <strong>{children}</strong>
 
+Bold.propTypes = {
+  children: PropTypes.string,
+}
+
+Bold.defaultProps = {
+  children: '',
+}
+
 const options = {
   renderMark: {
     [MARKS.BOLD]: (text) => <Bold>{text}</Bold>,
@@ -32,10 +40,10 @@ class RecipePostTemplate extends Component {
     const post = get(this.props, 'data.contentfulRecipe')
     const siteTitle = get(this.props, 'data.site.siteMetadata.title')
 
-    const { classes } = this.props
+    const { classes, location } = this.props
 
     return (
-      <Layout location={this.props.location}>
+      <Layout location={location}>
         <Helmet title={`${post.title} | ${siteTitle}`} />
         <Container maxWidth="md" className={classes.container}>
           <div>
@@ -67,6 +75,11 @@ class RecipePostTemplate extends Component {
 }
 
 export default compose(injectIntl, withStyles(styles))(RecipePostTemplate)
+
+RecipePostTemplate.propTypes = {
+  classes: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
+}
 
 export const pageQuery = graphql`
   query RecipePostBySlug($slug: String, $locale: String) {
