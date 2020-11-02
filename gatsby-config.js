@@ -18,9 +18,7 @@ if (process.env.CONTENTFUL_HOST) {
 const { spaceId, accessToken } = contentfulConfig
 
 if (!spaceId || !accessToken) {
-  throw new Error(
-    'Contentful spaceId and the access token need to be provided.'
-  )
+  throw new Error('Contentful spaceId and the access token need to be provided.')
 }
 
 module.exports = {
@@ -55,13 +53,11 @@ module.exports = {
       options: {
         fonts: [
           {
-            family: `Lobster`
-          },
-          {
-            family: `Satisfy`
+            family: `Lobster`,
           },
         ],
       },
-    }
+    },
+    `gatsby-plugin-material-ui`,
   ],
 }
