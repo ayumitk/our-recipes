@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { graphql } from 'gatsby'
-import { Helmet } from 'react-helmet'
+// import { Helmet } from 'react-helmet'
 import get from 'lodash/get'
 import Img from 'gatsby-image'
 import { MARKS } from '@contentful/rich-text-types'
@@ -11,6 +11,7 @@ import compose from 'recompose/compose'
 import PropTypes from 'prop-types'
 import Layout from '../components/layout'
 import theme from '../styles/theme'
+import SEO from '../components/SEO'
 
 const styles = () => ({
   root: {},
@@ -65,16 +66,17 @@ const options = {
 class RecipePostTemplate extends Component {
   render() {
     const post = get(this.props, 'data.contentfulRecipe')
-    const siteTitle = get(this.props, 'data.site.siteMetadata.title')
+    // const siteTitle = get(this.props, 'data.site.siteMetadata.title')
 
     const { classes, location, pageContext } = this.props
 
     const { language } = pageContext.intl
-    console.log(language)
+    // console.log(language)
 
     return (
-      <Layout location={location}>
-        <Helmet title={`${post.title} | ${siteTitle}`} />
+      <Layout location={location} customSEO>
+        <SEO post={post} article />
+        {/* <Helmet title={`${post.title} | ${siteTitle}`} /> */}
         <Container
           maxWidth="md"
           className={classes.container}
@@ -84,8 +86,8 @@ class RecipePostTemplate extends Component {
             <Img alt={post.title} fluid={post.heroImage.fluid} />
           </div>
           {post.categories.map((category) => (
-            <Link to={`/category/${category.slug}/`} key={category.slug} class={classes.category}>
-              {category.categoryName}
+            <Link to={`/category/${category.slug}/`} key={category.slug} className={classes.category}>
+              {category.title}
             </Link>
           ))}
           <Typography component="h1" variant="h4" className={classes.title}>
@@ -95,7 +97,7 @@ class RecipePostTemplate extends Component {
           <div>
             {post.tags.map((tag) => (
               <a href={`/tag/${tag.slug}/`} key={tag.slug} className={classes.tag}>
-                {tag.tagName}
+                {tag.title}
               </a>
             ))}
           </div>
@@ -118,11 +120,15 @@ export const pageQuery = graphql`
   query RecipePostBySlug($slug: String, $locale: String) {
     site {
       siteMetadata {
-        title
+        siteTitle
       }
     }
     contentfulRecipe(slug: { eq: $slug }, node_locale: { eq: $locale }) {
       title
+      slug
+      description {
+        description
+      }
       publishDate(formatString: "MMMM Do, YYYY")
       heroImage {
         fluid(maxWidth: 1200) {
@@ -130,11 +136,11 @@ export const pageQuery = graphql`
         }
       }
       categories {
-        categoryName
+        title
         slug
       }
       tags {
-        tagName
+        title
         slug
       }
       body {

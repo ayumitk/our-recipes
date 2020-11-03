@@ -46,7 +46,7 @@ class TagIndex extends Component {
         <Helmet title={siteTitle} />
         <Container className={classes.container}>
           <Typography component="h1" variant="h5" align="center" className={classes.sectionHeadline}>
-            {tag[0].node.tagName}
+            {tag[0].node.title}
           </Typography>
           <div className={classes.articleList}>
             {posts.map(({ node }) => (
@@ -88,11 +88,11 @@ export const pageQuery = graphql`
             }
           }
           categories {
-            categoryName
+            title
             slug
           }
           tags {
-            tagName
+            title
             slug
           }
         }
@@ -101,7 +101,7 @@ export const pageQuery = graphql`
     allContentfulTag(filter: { node_locale: { eq: $locale }, slug: { eq: $tag } }) {
       edges {
         node {
-          tagName
+          title
           slug
         }
       }

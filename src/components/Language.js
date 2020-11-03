@@ -5,7 +5,7 @@ import { Button, makeStyles } from '@material-ui/core'
 
 const languageName = {
   en: 'EN',
-  ja: '日本語',
+  ja: 'JP',
 }
 
 const useStyles = makeStyles(() => ({

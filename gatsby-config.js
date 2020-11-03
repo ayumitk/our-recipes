@@ -23,7 +23,25 @@ if (!spaceId || !accessToken) {
 
 module.exports = {
   siteMetadata: {
-    title: 'Gatsby Contentful starter',
+    pathPrefix: '/',
+    siteTitle: 'Our Recipes',
+    siteTitleAlt: {
+      en: "Our Recipes - Canadian and Japanese couple's recipe collection.",
+      ja: 'Our Recipes - 食べ物の好みが違いすぎる国際カップルが、2人で作って美味しく食べれるレシピコレクション',
+    },
+    siteUrl: 'https://ourrecipes.ca',
+    siteDescription: {
+      en: 'english description',
+      ja: '日本語の説明',
+    },
+    author: 'Gina',
+    siteHeadline: {
+      en: "Canadian and Japanese couple's recipe collection.",
+      ja: '食べ物の好みが違いすぎる国際カップルが、2人で作って美味しく食べれるレシピコレクション',
+    },
+    siteBanner: '/img/banner.jpg',
+    siteLogo: '/img/logo.png',
+    userTwitter: '@OurRecipesCA',
   },
   pathPrefix: '/gatsby-contentful-starter',
   plugins: [

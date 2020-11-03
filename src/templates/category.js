@@ -9,6 +9,7 @@ import PropTypes from 'prop-types'
 import Layout from '../components/layout'
 import ArticlePreview from '../components/article-preview'
 import theme from '../styles/theme'
+import SEO from '../components/SEO'
 
 const styles = () => ({
   root: {},
@@ -35,18 +36,20 @@ const styles = () => ({
 
 class CategoryIndex extends Component {
   render() {
-    const siteTitle = get(this, 'props.data.site.siteMetadata.title')
+    // const siteTitle = get(this, 'props.data.site.siteMetadata.siteTitle')
     const posts = get(this, 'props.data.allContentfulRecipe.edges')
-    const category = get(this, 'props.data.allContentfulCategory.edges')
+    const categories = get(this, 'props.data.allContentfulCategory.edges')
+    const category = categories[0].node
 
     const { classes, location } = this.props
 
     return (
-      <Layout location={location}>
-        <Helmet title={siteTitle} />
+      <Layout location={location} customSEO>
+        {/* <Helmet title={siteTitle} /> */}
+        <SEO archive={category} />
         <Container className={classes.container}>
           <Typography component="h1" variant="h5" align="center" className={classes.sectionHeadline}>
-            {category[0].node.categoryName}
+            {category.title}
           </Typography>
           <div className={classes.articleList}>
             {posts.map(({ node }) => (
@@ -70,7 +73,7 @@ export const pageQuery = graphql`
   query CategoryIndexQuery($locale: String, $category: String) {
     site {
       siteMetadata {
-        title
+        siteTitle
       }
     }
     allContentfulRecipe(
@@ -88,11 +91,11 @@ export const pageQuery = graphql`
             }
           }
           categories {
-            categoryName
+            title
             slug
           }
           tags {
-            tagName
+            title
             slug
           }
         }
@@ -101,8 +104,16 @@ export const pageQuery = graphql`
     allContentfulCategory(filter: { node_locale: { eq: $locale }, slug: { eq: $category } }) {
       edges {
         node {
-          categoryName
+          title
           slug
+          description {
+            description
+          }
+          image {
+            fluid {
+              src
+            }
+          }
         }
       }
     }

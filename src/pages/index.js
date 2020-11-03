@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { graphql } from 'gatsby'
 import get from 'lodash/get'
-import { Helmet } from 'react-helmet'
+// import { Helmet } from 'react-helmet'
 import { injectIntl } from 'gatsby-plugin-intl'
 import { Typography, withStyles, Container } from '@material-ui/core'
 import compose from 'recompose/compose'
@@ -9,6 +9,7 @@ import PropTypes from 'prop-types'
 import ArticlePreview from '../components/article-preview'
 import Layout from '../components/layout'
 import theme from '../styles/theme'
+// import SEO from '../components/SEO'
 
 const styles = () => ({
   root: {},
@@ -35,19 +36,19 @@ const styles = () => ({
 
 class RootIndex extends Component {
   render() {
-    const siteTitle = get(this, 'props.data.site.siteMetadata.title')
+    // const siteTitle = get(this, 'props.data.site.siteMetadata.title')
     const posts = get(this, 'props.data.allContentfulRecipe.edges')
 
     const { classes, location, pageContext } = this.props
 
-    const { intl } = pageContext
+    const lang = pageContext.intl.language
 
     return (
       <Layout location={location}>
-        <Helmet title={siteTitle} />
+        {/* <Helmet title={siteTitle} /> */}
         <Container className={classes.container}>
           <Typography component="h1" variant="h5" align="center" className={classes.sectionHeadline}>
-            {intl.messages.recentRecipes}
+            {lang === 'en' ? 'Recent Recipes' : '新着レシピ'}
           </Typography>
           <div className={classes.articleList}>
             {posts.map(({ node }) => (
@@ -87,11 +88,11 @@ export const pageQuery = graphql`
             }
           }
           categories {
-            categoryName
+            title
             slug
           }
           tags {
-            tagName
+            title
             slug
           }
         }

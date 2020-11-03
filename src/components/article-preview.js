@@ -62,7 +62,7 @@ const ArticlePreview = ({ article }) => {
         <CardContent>
           {article.categories.map((category) => (
             <Link to={`/category/${category.slug}/`} key={category.slug} className={classes.category}>
-              {category.categoryName}
+              {category.title}
             </Link>
           ))}
           <Link to={`/recipe/${article.slug}/`} className={classes.cardLink}>
@@ -78,7 +78,7 @@ const ArticlePreview = ({ article }) => {
       <CardActions className={classes.tagList}>
         {article.tags.map((tag) => (
           <Link to={`/tag/${tag.slug}/`} key={tag.slug} className={classes.tag}>
-            {tag.tagName}
+            {tag.title}
           </Link>
         ))}
       </CardActions>

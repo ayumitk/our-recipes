@@ -4,6 +4,8 @@ import PropTypes from 'prop-types'
 import Header from './Header'
 import Footer from './Footer'
 import theme from '../styles/theme'
+import useBuildTime from '../hooks/useBuildTime'
+import SEO from './SEO'
 
 const useStyles = makeStyles({
   root: {
@@ -14,12 +16,14 @@ const useStyles = makeStyles({
   },
 })
 
-const Layout = ({ children }) => {
+const Layout = ({ children, customSEO }) => {
   const classes = useStyles()
+  const buildTime = useBuildTime()
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+      {!customSEO && <SEO buildTime={buildTime} />}
       <div className={classes.root}>
         <Header />
         {children}
@@ -32,5 +36,10 @@ const Layout = ({ children }) => {
 export default Layout
 
 Layout.propTypes = {
-  children: PropTypes.array.isRequired,
+  children: PropTypes.oneOfType([PropTypes.array, PropTypes.node]).isRequired,
+  customSEO: PropTypes.bool,
+}
+
+Layout.defaultProps = {
+  customSEO: false,
 }

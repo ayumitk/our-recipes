@@ -38,7 +38,7 @@ exports.createPages = ({ graphql, actions }) => {
             allContentfulCategory {
               edges {
                 node {
-                  categoryName
+                  title
                   slug
                 }
               }
@@ -46,7 +46,7 @@ exports.createPages = ({ graphql, actions }) => {
             allContentfulTag {
               edges {
                 node {
-                  tagName
+                  title
                   slug
                 }
               }

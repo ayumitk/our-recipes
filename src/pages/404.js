@@ -1,11 +1,12 @@
 import React from 'react'
-import { Helmet } from 'react-helmet'
+// import { Helmet } from 'react-helmet'
 import { graphql } from 'gatsby'
 import { injectIntl } from 'gatsby-plugin-intl'
-import get from 'lodash/get'
+// import get from 'lodash/get'
 import PropTypes from 'prop-types'
 import { Typography, Container, makeStyles } from '@material-ui/core'
 import Layout from '../components/layout'
+import SEO from '../components/SEO'
 
 const useStyles = makeStyles({
   root: {},
@@ -21,13 +22,21 @@ const useStyles = makeStyles({
 })
 
 const NotFound = ({ location }) => {
-  const siteTitle = get(this, 'props.data.site.siteMetadata.title')
+  // const siteTitle = get(this, 'props.data.site.siteMetadata.siteTitle')
 
   const classes = useStyles()
 
+  const page = {
+    title: '404 Not Found',
+    description: '404 Not Found description',
+    image: '',
+    slug: '',
+  }
+
   return (
-    <Layout location={location}>
-      <Helmet title={siteTitle} />
+    <Layout location={location} customSEO>
+      {/* <Helmet title={siteTitle} /> */}
+      <SEO page={page} />
       <Container className={classes.container}>
         <Typography component="h1" variant="h5" align="center" className={classes.sectionHeadline}>
           404 Not Found
@@ -47,7 +56,7 @@ export const pageQuery = graphql`
   query NorFoundQuery {
     site {
       siteMetadata {
-        title
+        siteTitle
       }
     }
   }
