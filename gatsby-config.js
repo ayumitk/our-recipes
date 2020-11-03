@@ -29,7 +29,7 @@ module.exports = {
       en: "Our Recipes - Canadian and Japanese couple's recipe collection.",
       ja: 'Our Recipes - 食べ物の好みが違いすぎる国際カップルが、2人で作って美味しく食べれるレシピコレクション',
     },
-    siteUrl: 'https://ourrecipes.ca',
+    siteUrl: 'https://ourrecipesca.netlify.app',
     siteDescription: {
       en: 'english description',
       ja: '日本語の説明',
@@ -39,12 +39,20 @@ module.exports = {
       en: "Canadian and Japanese couple's recipe collection.",
       ja: '食べ物の好みが違いすぎる国際カップルが、2人で作って美味しく食べれるレシピコレクション',
     },
-    siteBanner: '/img/banner.jpg',
-    siteLogo: '/img/logo.png',
+    siteBanner: '/banner.jpg',
+    siteLogo: '/logo.png',
     userTwitter: '@OurRecipesCA',
   },
-  pathPrefix: '/gatsby-contentful-starter',
+  pathPrefix: '/',
   plugins: [
+    {
+      // keep as first gatsby-source-filesystem plugin for gatsby image support
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        path: `${__dirname}/static`,
+        name: 'images',
+      },
+    },
     'gatsby-transformer-remark',
     'gatsby-transformer-sharp',
     'gatsby-plugin-react-helmet',
