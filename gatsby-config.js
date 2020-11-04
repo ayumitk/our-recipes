@@ -29,7 +29,7 @@ module.exports = {
       en: "Our Recipes - Canadian and Japanese couple's recipe collection.",
       ja: 'Our Recipes - 食べ物の好みが違いすぎる国際カップルが、2人で作って美味しく食べれるレシピコレクション',
     },
-    siteUrl: 'https://ourrecipesca.netlify.app',
+    siteUrl: 'https://recipe.muchimemo.com',
     siteDescription: {
       en: 'english description',
       ja: '日本語の説明',
