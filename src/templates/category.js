@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { graphql } from 'gatsby'
 import get from 'lodash/get'
-import { Helmet } from 'react-helmet'
+// import { Helmet } from 'react-helmet'
 import { injectIntl } from 'gatsby-plugin-intl'
 import compose from 'recompose/compose'
 import { Typography, withStyles, Container } from '@material-ui/core'

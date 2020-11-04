@@ -63,7 +63,7 @@ const SEO = (props) => {
   } else if (archive) {
     title = `${archive.title} - ${siteTitle}`
     description = archive.description ? archive.description.description : siteDescription
-    image = `https:${archive.image.fluid.src}`
+    image = archive.image ? `https:${archive.image.fluid.src}` : `${homeURL}${siteBanner}`
     URL = `${homeURL}/category/${archive.slug}/`
   } else if (page) {
     title = `${page.title} - ${siteTitle}`
