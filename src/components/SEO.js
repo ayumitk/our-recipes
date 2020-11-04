@@ -6,7 +6,7 @@ import { useIntl } from 'gatsby-plugin-intl'
 
 const SEO = (props) => {
   const intl = useIntl()
-  const { local } = intl
+  const { locale } = intl
 
   const data = useStaticQuery(graphql`
     query SEOQuery {
@@ -37,13 +37,13 @@ const SEO = (props) => {
   const { pathPrefix, siteTitle, siteUrl, author, siteBanner, siteLogo, userTwitter } = data.site.siteMetadata
 
   const siteDescription =
-    local === 'en' ? data.site.siteMetadata.siteDescription.en : data.site.siteMetadata.siteDescription.ja
+    locale === 'en' ? data.site.siteMetadata.siteDescription.en : data.site.siteMetadata.siteDescription.ja
 
-  const siteTitleAlt = local === 'en' ? data.site.siteMetadata.siteTitleAlt.en : data.site.siteMetadata.siteTitleAlt.ja
+  const siteTitleAlt = locale === 'en' ? data.site.siteMetadata.siteTitleAlt.en : data.site.siteMetadata.siteTitleAlt.ja
 
-  const siteHeadline = local === 'en' ? data.site.siteMetadata.siteHeadline.en : data.site.siteMetadata.siteHeadline.ja
+  const siteHeadline = locale === 'en' ? data.site.siteMetadata.siteHeadline.en : data.site.siteMetadata.siteHeadline.ja
 
-  const ogLanguage = local === 'en' ? 'en-CA' : 'ja_JP'
+  const ogLanguage = locale === 'en' ? 'en-CA' : 'ja_JP'
 
   const { post, article, buildTime, archive, page } = props
 
@@ -62,7 +62,7 @@ const SEO = (props) => {
     URL = `${homeURL}/recipe/${post.slug}/`
   } else if (archive) {
     title = `${archive.title} - ${siteTitle}`
-    description = archive.description ? archive.description : siteDescription
+    description = archive.description ? archive.description.description : siteDescription
     image = `https:${archive.image.fluid.src}`
     URL = `${homeURL}/category/${archive.slug}/`
   } else if (page) {
@@ -86,7 +86,7 @@ const SEO = (props) => {
     '@type': 'WebPage',
     url: URL,
     headline: siteHeadline,
-    inLanguage: local,
+    inLanguage: locale,
     mainEntityOfPage: URL,
     description: siteDescription,
     name: title,
@@ -197,7 +197,7 @@ const SEO = (props) => {
 
   return (
     <Helmet>
-      <html lang={local} />
+      <html lang={locale} />
       <title>{title}</title>
       <meta name="description" content={description} />
       <meta name="image" content={image} />

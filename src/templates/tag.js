@@ -83,7 +83,7 @@ export const pageQuery = graphql`
           slug
           publishDate(formatString: "MMMM Do, YYYY")
           heroImage {
-            fluid(maxWidth: 1200) {
+            fluid(maxWidth: 800) {
               ...GatsbyContentfulFluid
             }
           }
