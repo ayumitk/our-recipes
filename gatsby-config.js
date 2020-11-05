@@ -45,15 +45,15 @@ module.exports = {
   },
   pathPrefix: '/',
   plugins: [
-    {
-      resolve: `gatsby-plugin-google-analytics`,
-      options: {
-        trackingId: 'G-L7NH23MPHP',
-        head: true,
-        respectDNT: true,
-        pageTransitionDelay: 250,
-      },
-    },
+    // {
+    //   resolve: `gatsby-plugin-google-analytics`,
+    //   options: {
+    //     trackingId: 'G-L7NH23MPHP',
+    //     head: true,
+    //     respectDNT: true,
+    //     pageTransitionDelay: 250,
+    //   },
+    // },
     {
       // keep as first gatsby-source-filesystem plugin for gatsby image support
       resolve: 'gatsby-source-filesystem',
@@ -63,9 +63,10 @@ module.exports = {
       },
     },
     'gatsby-transformer-remark',
-    'gatsby-transformer-sharp',
     'gatsby-plugin-react-helmet',
+    'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
+    `@wardpeet/gatsby-image-nextgen`,
     {
       resolve: 'gatsby-source-contentful',
       options: contentfulConfig,
@@ -98,6 +99,7 @@ module.exports = {
       resolve: 'gatsby-plugin-webpack-bundle-analyser-v2',
       options: {
         devMode: true,
+        disable: true,
       },
     },
   ],

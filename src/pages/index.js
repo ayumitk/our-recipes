@@ -38,18 +38,15 @@ class RootIndex extends Component {
   render() {
     // const siteTitle = get(this, 'props.data.site.siteMetadata.title')
     const posts = get(this, 'props.data.allContentfulRecipe.edges')
-
     const { classes, location, pageContext } = this.props
-
-    // const lang = pageContext.intl.language
+    const lang = pageContext.intl.language
 
     return (
       <Layout location={location}>
         {/* <Helmet title={siteTitle} /> */}
         <Container className={classes.container}>
           <Typography component="h1" variant="h5" align="center" className={classes.sectionHeadline}>
-            {/* {lang === 'en' ? 'Recent Recipes' : '新着レシピ'} */}
-            {pageContext.intl.messages.recentRecipes}
+            {lang === 'en' ? 'Recent Recipes' : '新着レシピ'}
           </Typography>
           <div className={classes.articleList}>
             {posts.map(({ node }) => (
