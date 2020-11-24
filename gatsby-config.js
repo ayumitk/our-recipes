@@ -29,12 +29,12 @@ module.exports = {
       en: "Our Recipes - Canadian and Japanese couple's recipe collection.",
       ja: 'Our Recipes - 食べ物の好みが違いすぎる国際カップルが、2人で作って美味しく食べれるレシピコレクション',
     },
-    siteUrl: 'https://recipe.muchimemo.com',
+    siteUrl: 'https://ourrecipes.ca',
     siteDescription: {
-      en: 'english description',
-      ja: '日本語の説明',
+      en: "Canadian and Japanese couple's recipe collection.",
+      ja: '食べ物の好みが違いすぎる国際カップルが、2人で作って美味しく食べれるレシピコレクション',
     },
-    author: 'Gina',
+    author: 'Colin & Ayumi',
     siteHeadline: {
       en: "Canadian and Japanese couple's recipe collection.",
       ja: '食べ物の好みが違いすぎる国際カップルが、2人で作って美味しく食べれるレシピコレクション',

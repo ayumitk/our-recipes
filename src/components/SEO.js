@@ -57,7 +57,7 @@ const SEO = (props) => {
 
   if (article) {
     title = `${post.title} - ${siteTitle}`
-    description = post.description ? post.description : siteDescription
+    description = post.description ? post.description.description : siteDescription
     image = `https:${post.heroImage.fluid.src}`
     URL = `${homeURL}/recipe/${post.slug}/`
   } else if (archive) {
