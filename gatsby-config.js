@@ -26,7 +26,7 @@ module.exports = {
     pathPrefix: '/',
     siteTitle: 'Our Recipes',
     siteTitleAlt: {
-      en: "Our Recipes - Colin & Ayumi's recipe collection",
+      en: "Our Recipes - Colin & Ayumi's Recipe Collection",
       ja: 'Our Recipes - 食の好みが違いすぎる国際カップルのレシピ集',
     },
     siteUrl: 'https://ourrecipes.ca',
@@ -37,7 +37,7 @@ module.exports = {
     },
     author: 'Colin & Ayumi',
     siteHeadline: {
-      en: "Our Recipes - Colin & Ayumi's recipe collection",
+      en: "Our Recipes - Colin & Ayumi's Recipe Collection",
       ja: 'Our Recipes - 食の好みが違いすぎる国際カップルのレシピ集',
     },
     siteBanner: '/banner.jpg',
