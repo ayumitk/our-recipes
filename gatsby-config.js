@@ -26,18 +26,19 @@ module.exports = {
     pathPrefix: '/',
     siteTitle: 'Our Recipes',
     siteTitleAlt: {
-      en: "Our Recipes - Canadian and Japanese couple's recipe collection.",
-      ja: 'Our Recipes - 食べ物の好みが違いすぎる国際カップルが、2人で作って美味しく食べれるレシピコレクション',
+      en: "Our Recipes - Colin & Ayumi's recipe collection",
+      ja: 'Our Recipes - 食の好みが違いすぎる国際カップルのレシピ集',
     },
     siteUrl: 'https://ourrecipes.ca',
     siteDescription: {
-      en: "Canadian and Japanese couple's recipe collection.",
-      ja: '食べ物の好みが違いすぎる国際カップルが、2人で作って美味しく食べれるレシピコレクション',
+      en: "Colin & Ayumi's recipe collection",
+      ja:
+        '食べ物の好みが違いすぎるカナダ人と日本人の国際カップルが、2人で作って美味しく食べれる料理のレシピを貯めていくためのブログです。',
     },
     author: 'Colin & Ayumi',
     siteHeadline: {
-      en: "Canadian and Japanese couple's recipe collection.",
-      ja: '食べ物の好みが違いすぎる国際カップルが、2人で作って美味しく食べれるレシピコレクション',
+      en: "Our Recipes - Colin & Ayumi's recipe collection",
+      ja: 'Our Recipes - 食の好みが違いすぎる国際カップルのレシピ集',
     },
     siteBanner: '/banner.jpg',
     siteLogo: '/logo.png',
