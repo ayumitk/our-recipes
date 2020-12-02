@@ -100,5 +100,6 @@ module.exports = {
         disable: true,
       },
     },
+    `gatsby-plugin-sitemap`,
   ],
 }
