@@ -15,14 +15,24 @@ import SEO from '../components/SEO'
 
 const styles = () => ({
   root: {},
+  heroImage: {
+    maxWidth: `912px`,
+    margin: `auto`,
+  },
   container: {
     paddingBottom: theme.spacing(6),
   },
   title: {
-    marginBottom: theme.spacing(2),
+    marginBottom: theme.spacing(1),
+    fontWeight: `bold`,
+    fontSize: `2rem`,
+    lineHeight: `1.25`,
+    [theme.breakpoints.down('xs')]: {
+      fontSize: `1.5rem`,
+    },
   },
   category: {
-    fontSize: `0.937rem`,
+    fontSize: `0.875rem`,
     backgroundColor: theme.palette.text.primary,
     color: `#fff`,
     display: `inline-block`,
@@ -30,19 +40,69 @@ const styles = () => ({
     textDecoration: `none`,
     marginTop: theme.spacing(4),
     marginBottom: theme.spacing(1),
+    [theme.breakpoints.down('xs')]: {
+      fontSize: `0.75rem`,
+    },
   },
   tag: {
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2),
     backgroundColor: `#f2ebd1`,
     color: theme.palette.text.primary,
     display: `inline-block`,
     padding: `0 1rem`,
     lineHeight: `34px`,
     borderRadius: `17px`,
-    fontSize: `0.937rem`,
+    fontSize: `0.875rem`,
     marginRight: `0.15rem`,
     textDecoration: `none`,
+    [theme.breakpoints.down('xs')]: {
+      fontSize: `0.75rem`,
+    },
     '&:hover': {
       backgroundColor: theme.palette.primary.light,
+    },
+  },
+  body: {
+    lineHeight: `1.9`,
+    '& h2': {
+      marginTop: theme.spacing(10),
+    },
+    '& p': {
+      marginBottom: theme.spacing(4),
+    },
+    '& ol': {
+      paddingLeft: 0,
+      marginBottom: theme.spacing(6),
+      counterReset: `number`,
+      listStyle: `none`,
+      '& li': {
+        display: `flex`,
+        alignItems: `start`,
+        '& p': {
+          marginTop: 0,
+          flex: 1,
+        },
+        '&::before': {
+          counterIncrement: `number`,
+          content: 'counter(number)',
+          background: theme.palette.primary.main,
+          display: `block`,
+          width: `30px`,
+          lineHeight: `30px`,
+          textAlign: `center`,
+          borderRadius: `15px`,
+          marginRight: theme.spacing(1),
+          fontWeight: `bold`,
+        },
+      },
+    },
+    '& ul': {
+      paddingLeft: `1.25rem`,
+      marginBottom: theme.spacing(6),
+      '& p': {
+        marginBottom: theme.spacing(2),
+      },
     },
   },
 })
@@ -77,23 +137,25 @@ class RecipePostTemplate extends Component {
       <Layout location={location} customSEO>
         <SEO post={post} article />
         {/* <Helmet title={`${post.title} | ${siteTitle}`} /> */}
+        <div className={classes.heroImage}>
+          <Img alt={post.title} fluid={post.heroImage.fluid} />
+        </div>
         <Container
           maxWidth="md"
           className={classes.container}
           style={{ fontSize: `${language === 'en' ? '1.125rem' : `1rem`}` }}
         >
-          <div>
-            <Img alt={post.title} fluid={post.heroImage.fluid} />
-          </div>
           {post.categories.map((category) => (
             <Link to={`/category/${category.slug}/`} key={category.slug} className={classes.category}>
               {category.title}
             </Link>
           ))}
-          <Typography component="h1" variant="h4" className={classes.title}>
+          <Typography component="h1" className={classes.title}>
             {post.title}
           </Typography>
-          <Typography>{post.publishDate}</Typography>
+          <Typography variant="body2" color="textSecondary">
+            {language === 'en' ? 'Last Update: ' : `最終更新日：`} {post.updatedAt}
+          </Typography>
           <div>
             {post.tags.map((tag) => (
               <a href={`/tag/${tag.slug}/`} key={tag.slug} className={classes.tag}>
@@ -101,7 +163,10 @@ class RecipePostTemplate extends Component {
               </a>
             ))}
           </div>
-          <div>{documentToReactComponents(post.body.json, options)}</div>
+          <Typography variant="body2" color="textSecondary" style={{ lineHeight: `1.8` }}>
+            {post.description && post.description.description}
+          </Typography>
+          <div className={classes.body}>{documentToReactComponents(post.body.json, options)}</div>
         </Container>
       </Layout>
     )
@@ -129,7 +194,8 @@ export const pageQuery = graphql`
       description {
         description
       }
-      publishDate(formatString: "MMMM Do, YYYY")
+      publishDate(formatString: "YYYY/MM/DD")
+      updatedAt(formatString: "YYYY/MM/DD")
       heroImage {
         fluid(maxWidth: 1360) {
           ...GatsbyContentfulFluid

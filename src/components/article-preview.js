@@ -14,14 +14,22 @@ const useStyles = makeStyles({
   },
   media: {
     height: `200px`,
+    [theme.breakpoints.down('xs')]: {
+      height: `150px`,
+    },
   },
   cardLink: {
     color: theme.palette.text.primary,
   },
   title: {
+    fontSize: `1.25rem`,
     lineHeight: `1.25`,
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(0.5),
+    fontWeight: `bold`,
+    [theme.breakpoints.down('xs')]: {
+      fontSize: `0.937rem`,
+    },
   },
   category: {
     fontSize: `0.75rem`,
@@ -29,9 +37,13 @@ const useStyles = makeStyles({
     color: `#fff`,
     display: `inline-block`,
     padding: `0.15rem 0.75rem`,
+    [theme.breakpoints.down('xs')]: {
+      fontSize: `0.625rem`,
+    },
   },
   tagList: {
-    paddingBottom: `2rem`,
+    paddingBottom: theme.spacing(3),
+    flexWrap: `wrap`,
   },
   tag: {
     backgroundColor: `#f2ebd1`,
@@ -41,7 +53,7 @@ const useStyles = makeStyles({
     lineHeight: `26px`,
     borderRadius: `13px`,
     fontSize: `0.75rem`,
-    marginLeft: `0.15rem !important`,
+    margin: `0.1rem !important`,
     '&:hover': {
       backgroundColor: theme.palette.primary.light,
     },
@@ -66,7 +78,7 @@ const ArticlePreview = ({ article }) => {
             </Link>
           ))}
           <Link to={`/recipe/${article.slug}/`} className={classes.cardLink}>
-            <Typography variant="h6" component="h2" className={classes.title}>
+            <Typography component="h2" className={classes.title}>
               {article.title}
             </Typography>
             <Typography variant="body2" color="textSecondary">
