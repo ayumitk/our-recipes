@@ -115,7 +115,7 @@ const Header = () => {
 
           <Typography variant="h4" align="center" className={classes.title}>
             <Link to="/" className={classes.titleLink}>
-              {siteTitle}
+              OurRecipes
             </Link>
           </Typography>
           <Language />
