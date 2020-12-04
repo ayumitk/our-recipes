@@ -86,6 +86,29 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `Our Recipes - Colin & Ayumi's Recipe Collection`,
+        short_name: `Our Recipes`,
+        description: `Colin & Ayumi's recipe collection`,
+        lang: `en`,
+        display: `minimal-ui`,
+        icon: `static/favicon.png`,
+        start_url: `/`,
+        background_color: `#f1c34a`,
+        theme_color: `#fff`,
+        localize: [
+          {
+            start_url: `/ja/`,
+            lang: `ja`,
+            name: `Our Recipes - 食の好みが違いすぎる国際カップルのレシピ集`,
+            short_name: `Our Recipes`,
+            description: `食べ物の好みが違いすぎるカナダ人と日本人の国際カップルが、2人で作って美味しく食べれる料理のレシピを貯めていくためのブログです。`,
+          },
+        ],
+      },
+    },
+    {
       resolve: `gatsby-plugin-google-fonts`,
       options: {
         fonts: [`Lobster`],
