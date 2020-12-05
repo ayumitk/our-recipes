@@ -152,7 +152,7 @@ const Header = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/about/">
+                <Link to="/about-us/">
                   <EmojiEmotionsIcon />
                   <span>{intl.locale === 'en' ? 'About' : '私たちについて'}</span>
                 </Link>
@@ -164,7 +164,7 @@ const Header = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/privacy/">
+                <Link to="/privacy-policy/">
                   <LockIcon />
                   <span>{intl.locale === 'en' ? 'Privacy Policy' : 'プライバシーポリシー'}</span>
                 </Link>

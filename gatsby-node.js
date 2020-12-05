@@ -22,6 +22,7 @@ exports.createPages = ({ graphql, actions }) => {
   return new Promise((resolve, reject) => {
     const recipeTemplate = path.resolve('./src/templates/recipe-post.js')
     const blogTemplate = path.resolve('./src/templates/blog-post.js')
+    const pageTemplate = path.resolve('./src/templates/page-post.js')
     const categoryTemplate = path.resolve('./src/templates/category.js')
     const tagTemplate = path.resolve('./src/templates/tag.js')
     resolve(
@@ -37,6 +38,14 @@ exports.createPages = ({ graphql, actions }) => {
               }
             }
             allContentfulBlog {
+              edges {
+                node {
+                  title
+                  slug
+                }
+              }
+            }
+            allContentfulPage {
               edges {
                 node {
                   title
@@ -88,6 +97,18 @@ exports.createPages = ({ graphql, actions }) => {
             component: blogTemplate,
             context: {
               slug: blog.node.slug,
+            },
+          })
+        })
+
+        // Create blog post pages
+        const pages = result.data.allContentfulPage.edges
+        pages.forEach((page) => {
+          createPage({
+            path: `/${page.node.slug}/`,
+            component: pageTemplate,
+            context: {
+              slug: page.node.slug,
             },
           })
         })
