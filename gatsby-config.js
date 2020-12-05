@@ -88,15 +88,16 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
+        start_url: `/`,
+        lang: `en`,
         name: `Our Recipes - Colin & Ayumi's Recipe Collection`,
         short_name: `Our Recipes`,
         description: `Colin & Ayumi's recipe collection`,
-        lang: `en`,
+        background_color: `#2d2d2d`,
+        theme_color: `#f1c34a`,
         display: `standalone`,
         icon: `static/favicon.png`,
-        start_url: `/`,
-        background_color: `#f1c34a`,
-        theme_color: `#f1c34a`,
+        crossOrigin: `use-credentials`,
         localize: [
           {
             start_url: `/ja/`,
