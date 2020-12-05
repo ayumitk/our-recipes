@@ -22,7 +22,9 @@ const styles = () => ({
       gridTemplateColumns: `repeat(3, 1fr)`,
     },
     [theme.breakpoints.down('xs')]: {
-      gridTemplateColumns: `repeat(1, 1fr)`,
+      gridTemplateColumns: `repeat(2, 1fr)`,
+      gridColumnGap: `10px`,
+      gridRowGap: `10px`,
     },
   },
   container: {
@@ -79,7 +81,7 @@ export const pageQuery = graphql`
         node {
           title
           slug
-          publishDate(formatString: "MMMM Do, YYYY")
+          publishDate(formatString: "YYYY/MM/DD")
           heroImage {
             fluid(maxWidth: 800) {
               ...GatsbyContentfulFluid

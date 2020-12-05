@@ -13,6 +13,37 @@ import SEO from '../components/SEO'
 
 const styles = () => ({
   root: {},
+  categoryHeader: {
+    height: `250px`,
+    backgroundSize: `cover`,
+    backgroundRepeat: `no-repeat`,
+    position: `relative`,
+    display: `flex`,
+    alignItems: `center`,
+    zIndex: 1,
+    [theme.breakpoints.down('xs')]: {
+      height: `160px`,
+    },
+    '& .MuiContainer-root': {
+      zIndex: 3,
+    },
+  },
+  categoryTitle: {
+    color: `#fff`,
+    fontWeight: `bold`,
+    [theme.breakpoints.down('xs')]: {
+      fontSize: `1.75rem`,
+    },
+  },
+  categoryHeaderCover: {
+    position: `absolute`,
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    background: `rgba(0,0,0,0.5)`,
+    zIndex: 2,
+  },
   articleList: {
     display: `grid`,
     gridTemplateColumns: `repeat(4, 1fr)`,
@@ -22,15 +53,14 @@ const styles = () => ({
       gridTemplateColumns: `repeat(3, 1fr)`,
     },
     [theme.breakpoints.down('xs')]: {
-      gridTemplateColumns: `repeat(1, 1fr)`,
+      gridTemplateColumns: `repeat(2, 1fr)`,
+      gridColumnGap: `10px`,
+      gridRowGap: `10px`,
     },
   },
   container: {
     paddingTop: theme.spacing(4),
     paddingBottom: theme.spacing(6),
-  },
-  sectionHeadline: {
-    marginBottom: theme.spacing(3),
   },
 })
 
@@ -47,10 +77,15 @@ class CategoryIndex extends Component {
       <Layout location={location} customSEO>
         {/* <Helmet title={siteTitle} /> */}
         <SEO archive={category} />
+        <header className={classes.categoryHeader} style={{ backgroundImage: `url(${category.image.fluid.src})` }}>
+          <div className={classes.categoryHeaderCover} />
+          <Container>
+            <Typography component="h1" variant="h4" align="center" className={classes.categoryTitle}>
+              {category.title}
+            </Typography>
+          </Container>
+        </header>
         <Container className={classes.container}>
-          <Typography component="h1" variant="h5" align="center" className={classes.sectionHeadline}>
-            {category.title}
-          </Typography>
           <div className={classes.articleList}>
             {posts.map(({ node }) => (
               <ArticlePreview key={node.slug} article={node} />
@@ -84,7 +119,7 @@ export const pageQuery = graphql`
         node {
           title
           slug
-          publishDate(formatString: "MMMM Do, YYYY")
+          publishDate(formatString: "YYYY/MM/DD")
           heroImage {
             fluid(maxWidth: 800) {
               ...GatsbyContentfulFluid

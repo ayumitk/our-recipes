@@ -11,11 +11,19 @@ const useStyles = makeStyles({
     '& a': {
       textDecoration: 'none',
     },
+    '& .MuiCardContent-root': {
+      [theme.breakpoints.down('xs')]: {
+        padding: `10px`,
+      },
+    },
+    '& .MuiCardActions-root': {
+      paddingTop: 0,
+    },
   },
   media: {
     height: `200px`,
     [theme.breakpoints.down('xs')]: {
-      height: `150px`,
+      height: `130px`,
     },
   },
   cardLink: {
@@ -38,12 +46,22 @@ const useStyles = makeStyles({
     display: `inline-block`,
     padding: `0.15rem 0.75rem`,
     [theme.breakpoints.down('xs')]: {
-      fontSize: `0.625rem`,
+      fontSize: `0.687rem`,
+      padding: `0.1rem 0.5rem`,
+    },
+  },
+  date: {
+    [theme.breakpoints.down('xs')]: {
+      fontSize: `0.75rem`,
     },
   },
   tagList: {
     paddingBottom: theme.spacing(3),
     flexWrap: `wrap`,
+    [theme.breakpoints.down('xs')]: {
+      paddingLeft: `5px`,
+      paddingRight: `5px`,
+    },
   },
   tag: {
     backgroundColor: `#f2ebd1`,
@@ -54,6 +72,12 @@ const useStyles = makeStyles({
     borderRadius: `13px`,
     fontSize: `0.75rem`,
     margin: `0.1rem !important`,
+    [theme.breakpoints.down('xs')]: {
+      fontSize: `0.687rem`,
+      lineHeight: `22px`,
+      borderRadius: `11px`,
+      padding: `0 0.5rem`,
+    },
     '&:hover': {
       backgroundColor: theme.palette.primary.light,
     },
@@ -81,7 +105,7 @@ const ArticlePreview = ({ article }) => {
             <Typography component="h2" className={classes.title}>
               {article.title}
             </Typography>
-            <Typography variant="body2" color="textSecondary">
+            <Typography variant="body2" color="textSecondary" className={classes.date}>
               {article.publishDate}
             </Typography>
           </Link>

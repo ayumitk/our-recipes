@@ -92,11 +92,11 @@ module.exports = {
         short_name: `Our Recipes`,
         description: `Colin & Ayumi's recipe collection`,
         lang: `en`,
-        display: `minimal-ui`,
+        display: `standalone`,
         icon: `static/favicon.png`,
         start_url: `/`,
         background_color: `#f1c34a`,
-        theme_color: `#fff`,
+        theme_color: `#f1c34a`,
         localize: [
           {
             start_url: `/ja/`,
