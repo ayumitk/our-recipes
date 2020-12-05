@@ -20,7 +20,8 @@ exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
 
   return new Promise((resolve, reject) => {
-    const postTemplate = path.resolve('./src/templates/recipe-post.js')
+    const recipeTemplate = path.resolve('./src/templates/recipe-post.js')
+    const blogTemplate = path.resolve('./src/templates/blog-post.js')
     const categoryTemplate = path.resolve('./src/templates/category.js')
     const tagTemplate = path.resolve('./src/templates/tag.js')
     resolve(
@@ -28,6 +29,14 @@ exports.createPages = ({ graphql, actions }) => {
         `
           {
             allContentfulRecipe {
+              edges {
+                node {
+                  title
+                  slug
+                }
+              }
+            }
+            allContentfulBlog {
               edges {
                 node {
                   title
@@ -60,13 +69,25 @@ exports.createPages = ({ graphql, actions }) => {
         }
 
         // Create recipe post pages
-        const posts = result.data.allContentfulRecipe.edges
-        posts.forEach((post) => {
+        const recipes = result.data.allContentfulRecipe.edges
+        recipes.forEach((recipe) => {
           createPage({
-            path: `/recipe/${post.node.slug}/`,
-            component: postTemplate,
+            path: `/recipe/${recipe.node.slug}/`,
+            component: recipeTemplate,
             context: {
-              slug: post.node.slug,
+              slug: recipe.node.slug,
+            },
+          })
+        })
+
+        // Create blog post pages
+        const blogs = result.data.allContentfulBlog.edges
+        blogs.forEach((blog) => {
+          createPage({
+            path: `/blog/${blog.node.slug}/`,
+            component: blogTemplate,
+            context: {
+              slug: blog.node.slug,
             },
           })
         })
