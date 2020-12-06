@@ -118,6 +118,12 @@ module.exports = {
     },
     `gatsby-plugin-material-ui`,
     {
+      resolve: `gatsby-plugin-google-adsense`,
+      options: {
+        publisherId: `ca-pub-2243735568608949`,
+      },
+    },
+    {
       resolve: 'gatsby-plugin-webpack-bundle-analyser-v2',
       options: {
         devMode: true,
