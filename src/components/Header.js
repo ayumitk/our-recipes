@@ -145,12 +145,12 @@ const Header = () => {
                 </ul>
               </li>
               <Divider />
-              <li>
+              {/* <li>
                 <Link to="/blog/">
                   <MenuBookIcon />
                   <span>{intl.locale === 'en' ? 'Blog' : 'ブログ'}</span>
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link to="/about-us/">
                   <EmojiEmotionsIcon />

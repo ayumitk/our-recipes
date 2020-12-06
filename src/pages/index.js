@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { graphql } from 'gatsby'
 import get from 'lodash/get'
-// import { Helmet } from 'react-helmet'
 import { injectIntl } from 'gatsby-plugin-intl'
 import { Typography, withStyles, Container } from '@material-ui/core'
 import compose from 'recompose/compose'
@@ -9,7 +8,7 @@ import PropTypes from 'prop-types'
 import ArticlePreview from '../components/article-preview'
 import Layout from '../components/layout'
 import theme from '../styles/theme'
-// import SEO from '../components/SEO'
+import SEO from '../components/SEO'
 
 const styles = () => ({
   root: {},
@@ -44,8 +43,8 @@ class RootIndex extends Component {
     const lang = pageContext.intl.language
 
     return (
-      <Layout location={location}>
-        {/* <Helmet title={siteTitle} /> */}
+      <Layout location={location} customSEO>
+        <SEO />
         <Container className={classes.container}>
           <Typography component="h1" variant="h5" align="center" className={classes.sectionHeadline}>
             {lang === 'en' ? 'Recent Recipes' : '新着レシピ'}

@@ -14,23 +14,24 @@ import SEO from '../components/SEO'
 const styles = () => ({
   root: {},
   container: {
-    paddingTop: theme.spacing(4),
+    paddingTop: theme.spacing(6),
     paddingBottom: theme.spacing(6),
     maxWidth: `728px`,
   },
   title: {
     marginBottom: theme.spacing(1),
     fontWeight: `bold`,
-    fontSize: `2rem`,
+    fontSize: `2.5rem`,
     lineHeight: `1.25`,
     [theme.breakpoints.down('xs')]: {
-      fontSize: `1.5rem`,
+      fontSize: `1.75rem`,
     },
   },
   body: {
     lineHeight: `1.9`,
     '& h2': {
       marginTop: theme.spacing(10),
+      lineHeight: `1.25`,
     },
     '& p': {
       marginTop: theme.spacing(4),
@@ -75,10 +76,10 @@ class PagePostTemplate extends Component {
           className={classes.container}
           style={{ fontSize: `${language === 'en' ? '1.125rem' : `1rem`}` }}
         >
-          <Typography component="h1" className={classes.title}>
+          <Typography component="h1" gutterBottom className={classes.title} align="center">
             {post.title}
           </Typography>
-          <Typography variant="body2" color="textSecondary">
+          <Typography variant="body2" color="textSecondary" align="center">
             {language === 'en' ? 'Last Update: ' : `最終更新日：`} {post.updatedAt}
           </Typography>
           <div className={classes.body}>{documentToReactComponents(post.body.json, options)}</div>

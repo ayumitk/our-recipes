@@ -5,9 +5,23 @@ import { Container, Button, Typography, TextField, withStyles } from '@material-
 import compose from 'recompose/compose'
 import Layout from '../components/layout'
 import SEO from '../components/SEO'
+import theme from '../styles/theme'
 
 const styles = () => ({
   root: {},
+  container: {
+    paddingTop: theme.spacing(6),
+    paddingBottom: theme.spacing(6),
+  },
+  title: {
+    marginBottom: theme.spacing(1),
+    fontWeight: `bold`,
+    fontSize: `2.5rem`,
+    lineHeight: `1.25`,
+    [theme.breakpoints.down('xs')]: {
+      fontSize: `1.75rem`,
+    },
+  },
 })
 
 function encode(data) {
@@ -54,8 +68,8 @@ class ContactPage extends Component {
     return (
       <Layout location={location} customSEO>
         <SEO page={page} />
-        <Container maxWidth="sm" style={{ paddingTop: '2.5rem' }}>
-          <Typography variant="h3" component="h1" gutterBottom align="center">
+        <Container maxWidth="sm" className={classes.container}>
+          <Typography component="h1" gutterBottom className={classes.title} align="center">
             {lang === 'en' ? 'Contact' : 'お問い合わせ'}
           </Typography>
           <form

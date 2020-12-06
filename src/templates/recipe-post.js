@@ -6,7 +6,7 @@ import Img from 'gatsby-image'
 import { MARKS } from '@contentful/rich-text-types'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { injectIntl, Link } from 'gatsby-plugin-intl'
-import { Typography, withStyles, Container } from '@material-ui/core'
+import { Typography, withStyles, Container, Divider } from '@material-ui/core'
 import compose from 'recompose/compose'
 import PropTypes from 'prop-types'
 import Layout from '../components/layout'
@@ -66,7 +66,8 @@ const styles = () => ({
   body: {
     lineHeight: `1.9`,
     '& h2': {
-      marginTop: theme.spacing(10),
+      marginTop: theme.spacing(6),
+      lineHeight: `1.25`,
     },
     '& p': {
       marginBottom: theme.spacing(4),
@@ -100,10 +101,22 @@ const styles = () => ({
     '& ul': {
       paddingLeft: `1.25rem`,
       marginBottom: theme.spacing(6),
+      // fontSize: `1.125rem`,
       '& p': {
-        marginBottom: theme.spacing(2),
+        marginTop: theme.spacing(1.5),
+        marginBottom: theme.spacing(1.5),
+        '& i': {
+          display: `block`,
+          color: theme.palette.text.secondary,
+          fontStyle: `normal`,
+          fontSize: `0.75rem`,
+          lineHeight: `1.3`,
+        },
       },
     },
+  },
+  divider: {
+    marginTop: theme.spacing(3),
   },
 })
 
@@ -126,12 +139,9 @@ const options = {
 class RecipePostTemplate extends Component {
   render() {
     const post = get(this.props, 'data.contentfulRecipe')
-    // const siteTitle = get(this.props, 'data.site.siteMetadata.title')
 
     const { classes, location, pageContext } = this.props
-
     const { language } = pageContext.intl
-    // console.log(language)
 
     return (
       <Layout location={location} customSEO>
@@ -166,6 +176,7 @@ class RecipePostTemplate extends Component {
           <Typography variant="body2" color="textSecondary" style={{ lineHeight: `1.8` }}>
             {post.description && post.description.description}
           </Typography>
+          <Divider className={classes.divider} />
           <div className={classes.body}>{documentToReactComponents(post.body.json, options)}</div>
         </Container>
       </Layout>

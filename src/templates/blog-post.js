@@ -73,19 +73,25 @@ class BlogPostTemplate extends Component {
           className={classes.container}
           style={{ fontSize: `${language === 'en' ? '1.125rem' : `1rem`}` }}
         >
-          <Typography component="h1" className={classes.title}>
-            {post.title}
-          </Typography>
-          <Typography variant="body2" color="textSecondary">
-            {language === 'en' ? 'Last Update: ' : `最終更新日：`} {post.updatedAt}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" style={{ lineHeight: `1.8` }}>
-            {post.description && post.description.description}
-          </Typography>
-          <div className={classes.heroImage}>
-            <Img alt={post.title} fluid={post.heroImage.fluid} />
-          </div>
-          <div className={classes.body}>{documentToReactComponents(post.body.json, options)}</div>
+          {post.title ? (
+            <>
+              <Typography component="h1" className={classes.title}>
+                {post.title}
+              </Typography>
+              <Typography variant="body2" color="textSecondary">
+                {language === 'en' ? 'Last Update: ' : `最終更新日：`} {post.updatedAt}
+              </Typography>
+              <Typography variant="body2" color="textSecondary" style={{ lineHeight: `1.8` }}>
+                {post.description && post.description.description}
+              </Typography>
+              <div className={classes.heroImage}>
+                <Img alt={post.title} fluid={post.heroImage.fluid} />
+              </div>
+              <div className={classes.body}>{documentToReactComponents(post.body.json, options)}</div>
+            </>
+          ) : (
+            <Typography align="center">Sorry, no English version.</Typography>
+          )}
         </Container>
       </Layout>
     )
