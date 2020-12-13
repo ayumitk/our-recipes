@@ -135,7 +135,6 @@ const Header = () => {
               </li>
               <Divider />
               <li>
-                <p>カテゴリ：</p>
                 <ul>
                   {categories.map((category) => (
                     <li key={category.node.slug}>
