@@ -114,6 +114,9 @@ const styles = () => ({
         },
       },
     },
+    '& a': {
+      color: theme.palette.secondary.dark,
+    },
   },
   divider: {
     marginTop: theme.spacing(3),
@@ -166,13 +169,15 @@ class RecipePostTemplate extends Component {
           <Typography variant="body2" color="textSecondary">
             {language === 'en' ? 'Last Update: ' : `最終更新日：`} {post.updatedAt}
           </Typography>
-          <div>
-            {post.tags.map((tag) => (
-              <a href={`/tag/${tag.slug}/`} key={tag.slug} className={classes.tag}>
-                {tag.title}
-              </a>
-            ))}
-          </div>
+          {post.tags && (
+            <div>
+              {post.tags.map((tag) => (
+                <a href={`/tag/${tag.slug}/`} key={tag.slug} className={classes.tag}>
+                  {tag.title}
+                </a>
+              ))}
+            </div>
+          )}
           <Typography variant="body2" color="textSecondary" style={{ lineHeight: `1.8` }}>
             {post.description && post.description.description}
           </Typography>

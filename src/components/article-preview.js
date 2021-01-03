@@ -111,13 +111,15 @@ const ArticlePreview = ({ article }) => {
           </Link>
         </CardContent>
       </CardActionArea>
-      <CardActions className={classes.tagList}>
-        {article.tags.map((tag) => (
-          <Link to={`/tag/${tag.slug}/`} key={tag.slug} className={classes.tag}>
-            {tag.title}
-          </Link>
-        ))}
-      </CardActions>
+      {article.tags && (
+        <CardActions className={classes.tagList}>
+          {article.tags.map((tag) => (
+            <Link to={`/tag/${tag.slug}/`} key={tag.slug} className={classes.tag}>
+              {tag.title}
+            </Link>
+          ))}
+        </CardActions>
+      )}
     </Card>
   )
 }
