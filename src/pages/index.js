@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 import { graphql } from 'gatsby'
 import get from 'lodash/get'
 import { injectIntl } from 'gatsby-plugin-intl'
-import { Typography, withStyles, Container } from '@material-ui/core'
+import { withStyles, Container, TextField } from '@material-ui/core'
 import compose from 'recompose/compose'
 import PropTypes from 'prop-types'
+import SearchIcon from '@material-ui/icons/Search'
 import ArticlePreview from '../components/article-preview'
 import Layout from '../components/layout'
 import theme from '../styles/theme'
@@ -30,25 +31,71 @@ const styles = () => ({
     paddingTop: theme.spacing(4),
     paddingBottom: theme.spacing(6),
   },
-  sectionHeadline: {
-    marginBottom: theme.spacing(3),
+  searchForm: {
+    marginBottom: theme.spacing(4),
   },
 })
 
 class RootIndex extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      filteredPosts: [],
+      query: '',
+    }
+  }
+
   render() {
-    // const siteTitle = get(this, 'props.data.site.siteMetadata.title')
-    const posts = get(this, 'props.data.allContentfulRecipe.edges')
+    const allPosts = get(this, 'props.data.allContentfulRecipe.edges')
     const { classes, location, pageContext } = this.props
     const lang = pageContext.intl.language
+
+    const handleInputChange = (event) => {
+      const query = event.target.value
+      const filteredPosts = allPosts.filter((post) => {
+        const { description, title, tags, categories } = post.node
+
+        const tagsArr = []
+        if (tags) {
+          tags.forEach((tag) => tagsArr.push(tag.title))
+        }
+
+        const categoriesArr = []
+        if (categories) {
+          categories.forEach((tag) => categoriesArr.push(tag.title))
+        }
+
+        return (
+          (description && description.description.toLowerCase().includes(query.toLowerCase())) ||
+          title.toLowerCase().includes(query.toLowerCase()) ||
+          tagsArr.join('').toLowerCase().includes(query.toLowerCase()) ||
+          categoriesArr.join('').toLowerCase().includes(query.toLowerCase())
+        )
+      })
+      this.setState({
+        query,
+        filteredPosts,
+      })
+    }
+
+    const posts = this.state.query ? this.state.filteredPosts : allPosts
 
     return (
       <Layout location={location} customSEO>
         <SEO />
         <Container className={classes.container}>
-          <Typography component="h1" variant="h5" align="center" className={classes.sectionHeadline}>
-            {lang === 'en' ? 'Recent Recipes' : '新着レシピ'}
-          </Typography>
+          <div style={{ position: 'relative' }}>
+            <SearchIcon style={{ position: 'absolute', right: 15, top: 15, width: 30, height: 30 }} />
+            <TextField
+              fullWidth
+              label={lang === 'en' ? 'Search recipes' : 'レシピを検索'}
+              variant="outlined"
+              value={this.state.query}
+              onChange={handleInputChange}
+              className={classes.searchForm}
+            />
+          </div>
+
           <div className={classes.articleList}>
             {posts.map(({ node }) => (
               <ArticlePreview article={node} key={node.slug} />
@@ -93,6 +140,9 @@ export const pageQuery = graphql`
           tags {
             title
             slug
+          }
+          description {
+            description
           }
         }
       }
